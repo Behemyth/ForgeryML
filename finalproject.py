@@ -7,6 +7,7 @@
 
 import os
 import random
+import shutil
 
 class IOclass:
 	def __init__(self):
@@ -32,10 +33,20 @@ def main():
 	path = dir + '/input/'
 	path = path + io.authorsWorks + '/'
 
+	if not os.path.exists(dir + "/bin/database/" + io.authorName):
+		os.makedirs(dir + "/bin/database/" + io.authorName)
+
 	for filename in os.listdir(path):
 		thisFile = open(path + filename, "r")
 		for line in thisFile:
+			# DO STUFF WITH INPUT DIRECTORY -----------------------
 			print line
+			# -----------------------------------------------------
+			# COPY INPUT DIRECTORY INTO DATABASE --------------------------
+			shutil.copy(path + filename, dir + "/bin/database/" + io.authorName + "/")
+			# -------------------------------------------------------------
+
+
 
 if __name__ == '__main__': main()
 
