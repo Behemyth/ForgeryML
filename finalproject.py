@@ -16,6 +16,8 @@ class IOclass:
 		self.filename = raw_input("ENTER FILENAME FOR PASSAGE: ")
 		self.authorsWorks = raw_input("ENTER DIRECTORY NAME FOR KNOWN WORKS ('none' to skip): ")
 
+def authorToVector():
+	
 
 def main():
 	#Prompt user for file and directory name
