@@ -17,8 +17,12 @@ class IOclass:
 		self.filename = raw_input("ENTER FILENAME FOR PASSAGE: ")
 		self.authorsWorks = raw_input("ENTER DIRECTORY NAME FOR KNOWN WORKS ('none' to skip): ")
 
-def authorToVector():
-	
+def authorToVector(author):
+	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+	path = dir + '/bin/database/'
+	path = path + author + '/'
+	for filename in os.listdir(path):
+		thisFile = open(path + filename, "r")
 
 def main():
 	#Prompt user for file and directory name
