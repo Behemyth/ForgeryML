@@ -1,4 +1,4 @@
-#-----------------------------------------------------#
+﻿#-----------------------------------------------------#
 #				AI Final Project					  #
 #					Front End                         #
 #													  #
@@ -8,6 +8,7 @@
 import os
 import random
 import shutil
+import Network
 
 class IOclass:
 	def __init__(self):
@@ -48,6 +49,8 @@ def main():
 			shutil.copy(path + filename, dir + "/bin/database/" + io.authorName + "/")
 			# -------------------------------------------------------------
 
+    #Network startup idk what the heck it takes---------------------------------------------------------
+    net=Network(,,,)
 
 
 if __name__ == '__main__': main()
