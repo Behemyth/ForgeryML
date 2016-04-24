@@ -56,7 +56,8 @@ def main():
 	filePath = "input/" + io.filename
 	inputFile = open(filePath, "r")
 
-	#FOR DEBUGGING (print input file data) ----------------------------------------
+	#FOR DEBUGGING (print input file data)
+	#----------------------------------------
 	#for line in inputFile:
 	#	print line
 	#------------------------------------------------------------------------------
@@ -66,11 +67,21 @@ def main():
 	else:
 		movePassagesToDirectory(io)
 
-		
+	data = [[[0,0], [0]],[[0,1], [1]],[[1,0], [1]],[[1,1], [0]]]
 
-    #Network startup idk what the heck it takes---------------------------------------------------------
-    #net=Network(,,,)
+    #takes in input size, hidden size (same size as input), outputs size (1 for
+    #binary yes/no)
+	network = Network.Network(2, 2, 1)
 
+	network.Train(data)
+	network.Test(data)
+
+    #Network startup idk what the heck it
+    #takes---------------------------------------------------------
+
+
+
+   
 
 if __name__ == '__main__': main()
 
