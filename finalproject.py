@@ -46,6 +46,7 @@ def movePassagesToDirectory(io):
 			# COPY INPUT DIRECTORY INTO DATABASE --------------------------
 			shutil.copy(path + filename, dir + "/bin/database/" + io.authorName + "/")
 			# -------------------------------------------------------------
+			vector(path + filename, io.authorName)
 
 def main():
 	#Prompt user for file and directory name

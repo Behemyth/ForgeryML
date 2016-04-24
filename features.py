@@ -2,7 +2,7 @@ import os
 
 def vector(filename, authorsName):
 	inputFile = open(filename, "r")
-	features = open(authorsName, "w")
+	features = open(authorsName, "w+")
 	features.write("<0,0,0>" + "\n")
 
 
