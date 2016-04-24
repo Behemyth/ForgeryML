@@ -54,7 +54,7 @@ def main():
 			# -------------------------------------------------------------
 
     #Network startup idk what the heck it takes---------------------------------------------------------
-    net=Network(,,,)
+    #net=Network(,,,)
 
 
 if __name__ == '__main__': main()
