@@ -1,21 +1,31 @@
 import os 
 
 def vector(filename, authorsName):
+	#filename is one of the author's works, authorsName is their feature vector file
 	inputFile = open(filename, "r")
 	features = open(authorsName, "w+")
+	#calculate the feature vector expected of the file
 	features.write("<0,0,0>" + "\n")
 
 
 def main():
+	#take the file path of the directory containing this python script, store that in dir
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+	#save the path to the database to path
 	path = dir + "/bin/database/"
+	#for each author in the database...
 	for author in os.listdir(path):
+		#get a path to the directory containing their works
 		dirPath = path + "/" + author + "/"
+		#get a path to the file that will hold their feature vector
 		authorFile = dir + "/bin/" + author + ".txt"
+		#simple I/O message for tracking the progress of the script, can remove later
 		print "Reading samples for author " + author
+		#for each of the author's works
 		for filename in os.listdir(dirPath):
-			#print filename #creates a wall of text now that we actually have a database
+			#get the path to the work
 			featuresFile = dirPath + filename
+			#call vector function
 			vector(featuresFile, authorFile)
 
 if __name__ == '__main__': main()
