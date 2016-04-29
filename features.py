@@ -12,8 +12,9 @@ def main():
 	for author in os.listdir(path):
 		dirPath = path + "/" + author + "/"
 		authorFile = dir + "/bin/" + author + ".txt"
+		print "Reading samples for author " + author
 		for filename in os.listdir(dirPath):
-			print filename
+			#print filename #creates a wall of text now that we actually have a database
 			featuresFile = dirPath + filename
 			vector(featuresFile, authorFile)
 
