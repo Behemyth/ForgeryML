@@ -66,6 +66,8 @@ def main():
 	else:
 		movePassagesToDirectory(io)
 
+	x = 5
+
 		
 
     #Network startup idk what the heck it takes---------------------------------------------------------
