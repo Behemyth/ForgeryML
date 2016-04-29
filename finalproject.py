@@ -8,7 +8,6 @@
 import os
 import random
 import shutil
-import Network
 from features import vector
 import pybrain
 
