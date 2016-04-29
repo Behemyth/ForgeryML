@@ -73,7 +73,7 @@ def main():
 
     #Network startup idk what the heck it takes---------------------------------------------------------
     #net=Network(,,,)
-
+	#look in the Network.py code to see stuff
 
 if __name__ == '__main__': main()
 
