@@ -3,6 +3,7 @@ import random
 import string
 import random
 from datetime import datetime
+import pybrain
 
 random.seed(datetime.now())
 
