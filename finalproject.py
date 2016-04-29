@@ -16,9 +16,11 @@ class IOclass:
 
 		self.authorName = raw_input("ENTER AUTHOR NAME: ")
 		self.filename = raw_input("ENTER FILENAME FOR PASSAGE: ")
+		#note: shouldn't we be able to figure out the directory name for known works based on the author's name pretty easily? Take a look at features.py or I can too I guess
 		self.authorsWorks = raw_input("ENTER DIRECTORY NAME FOR KNOWN WORKS ('none' to skip): ")
 
 def authorToVector(author):
+	#note: what does this function used for? just opens a bunch of files
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 	path = dir + '/bin/database/'
 	path = path + author + '/'
@@ -27,9 +29,9 @@ def authorToVector(author):
 
 def movePassagesToDirectory(io):
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
-	path = dir + '/input/'
-	path = path + io.authorsWorks + '/'
+	path = dir + '/input/' + io.authorsWorks + '/'
 
+	#note: if directory doesn't exist should we just create one?
 	if not os.path.exists(path):
 		print "ERROR: desired directory does not exist"
 		return
