@@ -10,6 +10,7 @@ import random
 import shutil
 import Network
 from features import vector
+import pybrain
 
 class IOclass:
 	def __init__(self):
@@ -80,8 +81,19 @@ def main():
 
     #Network startup idk what the heck it
     #takes---------------------------------------------------------
+	from pybrain.tools.shortcuts import buildNetwork
+	net = buildNetwork(2, 3, 1)
 
+	from pybrain.datasets import SupervisedDataSet
+	ds = SupervisedDataSet(2, 1)
+	ds.addSample((0, 0), (0,))
+	ds.addSample((0, 1), (1,))
+	ds.addSample((1, 0), (1,))
+	ds.addSample((1, 1), (0,))
 
+	from pybrain.supervised.trainers import BackpropTrainer
+	trainer = BackpropTrainer(net, ds)
+	trainer.trainUntilConvergence()
 
 
 if __name__ == '__main__': main()
