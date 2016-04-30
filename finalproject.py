@@ -8,7 +8,6 @@
 import os
 import random
 import shutil
-import Network
 from features import vector
 import sklearn
 
@@ -69,13 +68,6 @@ def main():
 	else:
 		movePassagesToDirectory(io)
 
-	x = 5
-
-		
-
-    #Network startup idk what the heck it takes---------------------------------------------------------
-    #net=Network(,,,)
-	#look in the Network.py code to see stuff
 
 if __name__ == '__main__': main()
 
