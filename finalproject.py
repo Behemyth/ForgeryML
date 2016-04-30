@@ -9,7 +9,7 @@ import os
 import random
 import shutil
 from features import vector
-import pybrain
+import sklearn
 
 class IOclass:
 	def __init__(self):
