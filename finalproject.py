@@ -8,30 +8,31 @@
 import os
 import random
 import shutil
+import Network
 from features import vector
 import sklearn
+
 
 class IOclass:
 	def __init__(self):
 
 		self.authorName = raw_input("ENTER AUTHOR NAME: ")
 		self.filename = raw_input("ENTER FILENAME FOR PASSAGE: ")
-		#note: shouldn't we be able to figure out the directory name for known works based on the author's name pretty easily? Take a look at features.py or I can too I guess
 		self.authorsWorks = raw_input("ENTER DIRECTORY NAME FOR KNOWN WORKS ('none' to skip): ")
 
 def authorToVector(author):
-	#note: what does this function used for? just opens a bunch of files
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 	path = dir + '/bin/database/'
 	path = path + author + '/'
 	for filename in os.listdir(path):
 		thisFile = open(path + filename, "r")
+		#call feature vector code here!
 
 def movePassagesToDirectory(io):
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
-	path = dir + '/input/' + io.authorsWorks + '/'
+	path = dir + '/input/'
+	path = path + io.authorsWorks + '/'
 
-	#note: if directory doesn't exist should we just create one?
 	if not os.path.exists(path):
 		print "ERROR: desired directory does not exist"
 		return
@@ -58,8 +59,7 @@ def main():
 	filePath = "input/" + io.filename
 	inputFile = open(filePath, "r")
 
-	#FOR DEBUGGING (print input file data)
-	#----------------------------------------
+	#FOR DEBUGGING (print input file data) ----------------------------------------
 	#for line in inputFile:
 	#	print line
 	#------------------------------------------------------------------------------
@@ -69,23 +69,17 @@ def main():
 	else:
 		movePassagesToDirectory(io)
 
+	x = 5
 
+		
 
-    #Network startup idk what the heck it
-    #takes---------------------------------------------------------
-	from pybrain.tools.shortcuts import buildNetwork
-	net = buildNetwork(2, 3, 1)
-
-	from pybrain.datasets import SupervisedDataSet
-	ds = SupervisedDataSet(2, 1)
-	ds.addSample((0, 0), (0,))
-	ds.addSample((0, 1), (1,))
-	ds.addSample((1, 0), (1,))
-	ds.addSample((1, 1), (0,))
-
-	from pybrain.supervised.trainers import BackpropTrainer
-	trainer = BackpropTrainer(net, ds)
-	trainer.trainUntilConvergence()
-
+    #Network startup idk what the heck it takes---------------------------------------------------------
+    #net=Network(,,,)
+	#look in the Network.py code to see stuff
 
 if __name__ == '__main__': main()
+
+
+
+
+	
