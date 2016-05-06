@@ -67,8 +67,12 @@ def main():
 		print "no directory selected"
 	else:
 		movePassagesToDirectory(io)
+	
+	from sklearn import svm
 
-
+	train1 = svm.SVC(kernel='rbf')
+	train1.fit(featureList, classifierList)
+	train1.predict(test.txt)
 
 if __name__ == '__main__': main()
 
