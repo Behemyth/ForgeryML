@@ -1,18 +1,28 @@
-import os 
+﻿import os 
+import featurevecs
 
 def vector(filename, authorsName):
 	#filename is one of the author's works, authorsName is their feature vector file
 	inputFile = open(filename, "r")
-	features = open(authorsName, "w+")
+	features = open(authorsName, "a+")
 	#calculate the feature vector expected of the file
-	features.write("<0,0,0>" + "\n")
+	#featurevecs.Extract(inputFile)
+	features.write(str(featurevecs.Extract(inputFile))[1:-1] + "\n")
 
+def passageToFeature(filename):
+	inputFile = open(filename, "r")
+	return [0,0,0]
+
+def formDict(filename, dict):
+	inputFile = open(filename, "r")
 
 def main():
 	#take the file path of the directory containing this python script, store that in dir
 	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
 	#save the path to the database to path
 	path = dir + "/bin/database/"
+
+
 	#for each author in the database...
 	for author in os.listdir(path):
 		#get a path to the directory containing their works

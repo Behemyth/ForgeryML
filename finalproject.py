@@ -8,8 +8,8 @@
 import os
 import random
 import shutil
-from features import vector
-import sklearn
+from features import *
+#import sklearn
 
 
 class IOclass:
@@ -43,7 +43,7 @@ def movePassagesToDirectory(io):
 		thisFile = open(path + filename, "r")
 		for line in thisFile:
 			# DO STUFF WITH INPUT DIRECTORY -----------------------
-			print line
+			#print line
 			# -----------------------------------------------------
 			# COPY INPUT DIRECTORY INTO DATABASE --------------------------
 			shutil.copy(path + filename, dir + "/bin/database/" + io.authorName + "/")
@@ -67,12 +67,70 @@ def main():
 		print "no directory selected"
 	else:
 		movePassagesToDirectory(io)
-	
+
+	dir = os.path.dirname(os.path.realpath(__import__("__main__").__file__))
+	dir += "/bin/"
+	featureList = []
+	classifierList = []
+	for filename in os.listdir(dir):
+		if filename == "database":
+			continue;
+		authorFile = open(dir + filename, "r")
+		for line in authorFile:
+			authorVec = []
+			for feature in line.split(","):
+				authorVec.append(int(feature))
+			featureList.append(authorVec)
+			if filename == io.authorName + ".txt":
+				classifierList.append(1)
+			else:
+				classifierList.append(0)
+
+	inputVector = passageToFeature(filePath)
+
+
+	print("Support Vector Machine:\n")
 	from sklearn import svm
 
+	print("	Creating...\n")
 	train1 = svm.SVC(kernel='rbf')
+
+	print("	Training...\n")
 	train1.fit(featureList, classifierList)
-	train1.predict(test.txt)
+
+	print("	Predicting...\n")
+	print("	Result: "+str(train1.predict([inputVector])))
+
+
+	print("Nueral Network:\n")
+	from pybrain.tools.shortcuts import buildNetwork
+
+	print("	Creating...\n")
+	from pybrain.structure import TanhLayer
+	net = buildNetwork(len(featureList[0]), len(featureList[0])+1, 1, hiddenclass=TanhLayer)
+
+	from pybrain.datasets import SupervisedDataSet
+
+	#size= amount of features per feature vector
+	ds = SupervisedDataSet(len(featureList[0]), 1)
+
+	for item, classifier in zip(featureList,classifierList):
+		ds.addSample(tuple(item),(classifier,))
+
+	
+	print("	Training...\n")
+	from pybrain.supervised.trainers import BackpropTrainer
+
+	trainer = BackpropTrainer(net, ds)
+	trainer.train()
+	trainer.train()
+	trainer.train()
+	trainer.train()
+
+
+	print("	Predicting...\n")
+	result = net.activate(inputVector)
+	print ("	Result: "+str(result))
 
 if __name__ == '__main__': main()
 
