@@ -11,7 +11,7 @@ def vector(filename, authorsName):
 
 def passageToFeature(filename):
 	inputFile = open(filename, "r")
-	return [0,0,0]
+	return featurevecs.Extract(inputFile)
 
 def formDict(filename, dict):
 	inputFile = open(filename, "r")

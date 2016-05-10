@@ -48,7 +48,7 @@ def movePassagesToDirectory(io):
 			# COPY INPUT DIRECTORY INTO DATABASE --------------------------
 			shutil.copy(path + filename, dir + "/bin/database/" + io.authorName + "/")
 			# -------------------------------------------------------------
-			vector(path + filename, io.authorName)
+			vector(path + filename, dir+"/bin/"+io.authorName+".txt")
 
 def main():
 	#Prompt user for file and directory name
@@ -79,7 +79,7 @@ def main():
 		for line in authorFile:
 			authorVec = []
 			for feature in line.split(","):
-				authorVec.append(int(feature))
+				authorVec.append(float(feature))
 			featureList.append(authorVec)
 			if filename == io.authorName + ".txt":
 				classifierList.append(1)
@@ -99,8 +99,15 @@ def main():
 	train1.fit(featureList, classifierList)
 
 	print("	Predicting...\n")
-	print("	Result: "+str(train1.predict([inputVector])))
 
+	result = train1.predict([inputVector])
+	if result ==0:
+		print("	Result: "+"Forgery")
+	else:
+		print("	Result: "+"Legit")
+	score=train1.score(featureList, classifierList)
+
+	print("		Mean accuracy of the SVM (training set): "+str(score)+'\n')
 
 	print("Nueral Network:\n")
 	from pybrain.tools.shortcuts import buildNetwork
@@ -122,15 +129,19 @@ def main():
 	from pybrain.supervised.trainers import BackpropTrainer
 
 	trainer = BackpropTrainer(net, ds)
-	trainer.train()
-	trainer.train()
-	trainer.train()
-	trainer.train()
 
+	NUM_EPOCHS=100
+
+	for i in range(NUM_EPOCHS):
+		error = trainer.train()
+	error = trainer.train()
+	print "Epoch: %d, Error: %7.4f" % (50, error)
 
 	print("	Predicting...\n")
 	result = net.activate(inputVector)
-	print ("	Result: "+str(result))
+	print ("	Result: "+str(result)[1:-1] + "% a forgery")
+
+
 
 if __name__ == '__main__': main()
 
